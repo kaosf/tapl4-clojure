@@ -2,6 +2,27 @@
   (:require [clojure.test :refer :all]
             [tapl4.core :refer :all]))
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+(deftest myeval-test
+  (testing ":true"
+    (is (= (myeval :true) :true)))
+  (testing ":false"
+    (is (= (myeval :false) :false)))
+  (testing ":zero"
+    (is (= (myeval :zero) :zero)))
+  (testing ":succ"
+    (are [x y] (= (myeval '(:succ x)) y)
+         :zero         '(:succ :zero)
+         (:pred :zero) :zero))
+  (testing ":pred"
+    (are [x y] (= (myeval '(:pred x)) y)
+         :zero        '(:pred :zero)
+         (:succ :zero) :zero))
+  (testing ":iszero"
+    (are [x y] (= (myeval '(:iszero x)) y)
+         :zero          :true
+         (:succ :zero) :false
+         (:pred :zero) :false))
+  (testing ":ifthenelse"
+    (are [c t e  x] (= (myeval '(:ifthenelse c t e)) x)
+         :true :zero :false  :zero
+         :false :true :zero  :zero)))
