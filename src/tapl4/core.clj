@@ -6,6 +6,13 @@
   [& args]
   (println "Hello, World!"))
 
+(defn numeric? [t]
+  (case (first t)
+    :zero true
+    :succ (numeric? (rest t))
+    :pred (numeric? (rest t))
+    false))
+
 (defn myeval [t]
   (cond
     (keyword? t) (case t
