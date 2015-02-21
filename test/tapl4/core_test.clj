@@ -25,6 +25,13 @@
     (are [x y] (= (myeval x) y)
          (myeval '(:pred :zero))         '(:pred :zero)
          (myeval '(:pred (:pred :zero))) '(:pred (:pred :zero))))
+  (testing "complex nested :succ and :pred"
+    (are [x y] (= (myeval x) y)
+         (myeval '(:succ (:pred (:succ :zero)))) '(:succ :zero)
+         (myeval '(:pred (:succ (:pred :zero)))) '(:pred :zero)
+         (myeval '(:succ (:pred (:succ (:succ :zero))))) '(:succ (:succ :zero))
+         (myeval '(:pred (:succ (:pred (:pred :zero))))) '(:pred (:pred :zero))
+         ))
   (testing ":iszero"
     (are [x y] (= (myeval '(:iszero x)) y)
          :zero         :true
