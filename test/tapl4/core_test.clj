@@ -19,11 +19,11 @@
          (:succ :zero) :zero))
   (testing "nested :succ"
     (are [x y] (= (myeval x) y)
-         (myeval '(:succ :zero)) '(:succ :zero)
+         (myeval '(:succ :zero))         '(:succ :zero)
          (myeval '(:succ (:succ :zero))) '(:succ (:succ :zero))))
   (testing "nested :pred"
     (are [x y] (= (myeval x) y)
-         (myeval '(:pred :zero)) '(:pred :zero)
+         (myeval '(:pred :zero))         '(:pred :zero)
          (myeval '(:pred (:pred :zero))) '(:pred (:pred :zero))))
   (testing ":iszero"
     (are [x y] (= (myeval '(:iszero x)) y)
