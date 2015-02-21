@@ -22,9 +22,17 @@
     (list? t) (let [f (first t)
                     s (second t)]
                 (case f
-                  :succ (case s
-                          '(:pred :zero) :zero
-                          (list :succ (myeval s)))
+                  :succ (cond s
+                          (= s :zero) '(:succ :zero)
+                          (list? s)   (let [fs (first s)
+                                            rs (rest s)]
+                                        (case fs
+                                          :pred (myeval rs)
+                                          (list :succ (myeval ss))))
+                          :else       9
+                          (comment
+                           '(:pred :zero) :zero
+                           (list :succ (myeval s))))
                   :pred (case s
                           '(:succ :zero) :zero
                           (list :pred (myeval s)))
