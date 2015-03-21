@@ -7,3 +7,10 @@
     :succ (numericval? (second t))
     :pred (numericval? (second t))
     false))
+
+(defn val? [t]
+  (case (first t)
+    :zero  true
+    :true  true
+    :false true
+    (numericval? t)))

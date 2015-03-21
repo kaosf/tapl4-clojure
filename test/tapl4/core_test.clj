@@ -10,4 +10,13 @@
     (is (= false (numericval? '(:true))))
     (is (= false (numericval? '(:false))))
     )
+  (testing "val?"
+    (is (= true  (val? '(:true))))
+    (is (= true  (val? '(:false))))
+    (is (= true  (val? '(:zero))))
+    (is (= true  (val? '(:succ (:zero)))))
+    (is (= true  (val? '(:pred (:zero)))))
+    (is (= false (val? '(:if (:true) (:zero) (:false)))))
+    (is (= false (val? '(:iszero (:zero)))))
+    )
   )
