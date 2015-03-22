@@ -29,6 +29,9 @@
                  :zero '(:zero)
                  :succ (when-let [nv1 (second t1)] (numericval? nv1) nv1)
                  `(:pred ~(eval1 t1))))
+    :iszero (let [[t1] (rest t)]
+              (case (first t1)
+                :zero '(:true)))
     t
     )
   )

@@ -31,5 +31,6 @@
            (eval1 '(:pred (:succ (:zero))))))
     (is (=        '(:pred              (:zero))
            (eval1 '(:pred (:if (:true) (:zero) (:false))))))
+    (is (= '(:true) (eval1 '(:iszero (:zero)))))
     )
   )
